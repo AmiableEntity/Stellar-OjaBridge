@@ -10,6 +10,12 @@ impl MockPayoutProvider {
     }
 }
 
+impl Default for MockPayoutProvider {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[async_trait]
 impl PayoutProvider for MockPayoutProvider {
     async fn send_payout(&self, details: PayoutDetails) -> Result<PayoutResponse, PayoutError> {
