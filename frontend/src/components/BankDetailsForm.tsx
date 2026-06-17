@@ -84,6 +84,8 @@ export default function BankDetailsForm() {
             <option value="033">UBA</option>
             <option value="057">Zenith Bank</option>
             <option value="011">First Bank</option>
+            <option value="050">Ecobank</option>
+            <option value="070">Fidelity Bank</option>
           </select>
         </div>
 
