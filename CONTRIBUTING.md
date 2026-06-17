@@ -1,8 +1,5 @@
 # Contributing to Stellar-OjaBridge
 
-Welcome! This project is part of the **Drips Wave** initiative to build open-source financial infrastructure for Africa using the Stellar network.
-
-## Mission
 
 Stellar-OjaBridge aims to provide a modular, high-performance SEP-24 anchor that can be adapted to multiple African markets. By contributing, you're helping expand financial access across the continent.
 
@@ -58,8 +55,18 @@ pub struct KenyaPayoutProvider {
 
 #[async_trait]
 impl PayoutProvider for KenyaPayoutProvider {
-    async fn send_payout(&self, details: PayoutDetails) -> Result<String, PayoutError> {
+    async fn send_payout(&self, details: PayoutDetails) -> Result<PayoutResponse, PayoutError> {
         // Implementation
+        todo!()
+    }
+
+    async fn check_status(&self, transaction_id: &str) -> Result<String, PayoutError> {
+        // Implementation
+        todo!()
+    }
+
+    fn provider_name(&self) -> &str {
+        "KenyaProvider"
     }
 }
 ```
