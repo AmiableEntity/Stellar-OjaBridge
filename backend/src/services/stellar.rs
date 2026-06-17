@@ -13,6 +13,13 @@ impl StellarService {
             network_passphrase: "Test SDF Network ; September 2015".to_string(),
         }
     }
+}
+
+impl Default for StellarService {
+    fn default() -> Self {
+        Self::new()
+    }
+}
 
     pub async fn verify_transaction(&self, tx_id: &str) -> Result<bool> {
         // Placeholder for Stellar transaction verification
