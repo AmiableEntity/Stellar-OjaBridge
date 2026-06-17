@@ -39,7 +39,8 @@ async fn main() {
 async fn health_check() -> (StatusCode, Json<Value>) {
     (StatusCode::OK, Json(json!({
         "status": "healthy",
-        "service": "stellar-ojabridge"
+        "service": "stellar-ojabridge",
+        "version": env!("CARGO_PKG_VERSION")
     })))
 }
 
