@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Stellar-OjaBridge',
-  description: 'Stellar SEP-24 Anchor for African Markets',
+  description: 'Stellar SEP-24 Anchor for African Markets — seamless fiat-to-crypto on/off-ramps.',
 }
 
 export default function RootLayout({
