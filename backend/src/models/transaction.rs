@@ -7,6 +7,7 @@ use chrono::{DateTime, Utc};
 #[sqlx(type_name = "transaction_status", rename_all = "lowercase")]
 pub enum TransactionStatus {
     Pending,
+    Processing,
     Completed,
     Failed,
 }
