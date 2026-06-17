@@ -34,6 +34,10 @@ pub struct PayoutResponse {
     pub message: Option<String>,
 }
 
+/// Trait for payout provider adapters.
+///
+/// Implement this trait to integrate a new fiat payout provider
+/// (e.g. Flutterwave, Paystack, M-Pesa) into the anchor service.
 #[async_trait]
 pub trait PayoutProvider: Send + Sync {
     async fn send_payout(&self, details: PayoutDetails) -> Result<PayoutResponse, PayoutError>;
