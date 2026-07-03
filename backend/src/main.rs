@@ -30,11 +30,21 @@ async fn main() -> Result<()> {
         .route("/sep24/info", get(routes::sep24::info))
         .layer(CorsLayer::permissive());
 
-    let addr = SocketAddr::from(([0, 0, 0, 0], 8080));
+    let port = std::env::var("BACKEND_PORT")
+        .unwrap_or_else(|_| "8080".to_string())
+        .parse::<u16>()
+        .unwrap_or(8080);
+
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
     tracing::info!("Server listening on {}", addr);
 
-    let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+    let listener = tokio::net::TcpListener::bind(addr)
+        .await
+        .with_context(|| format!("failed to bind to {}", addr))?;
+
+    axum::serve(listener, app).await?;
+
+    Ok(())
 }
 
 async fn health_check() -> (StatusCode, Json<Value>) {
