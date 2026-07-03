@@ -1,3 +1,4 @@
+use anyhow::{Context, Result};
 use axum::{
     routing::get,
     Router,
@@ -15,7 +16,7 @@ mod services;
 mod payouts;
 
 #[tokio::main]
-async fn main() {
+async fn main() -> Result<()> {
     dotenv::dotenv().ok();
     
     tracing_subscriber::fmt()
