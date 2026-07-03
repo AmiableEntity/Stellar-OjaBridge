@@ -56,13 +56,11 @@ pub struct KenyaPayoutProvider {
 #[async_trait]
 impl PayoutProvider for KenyaPayoutProvider {
     async fn send_payout(&self, details: PayoutDetails) -> Result<PayoutResponse, PayoutError> {
-        // Implementation
-        todo!()
+        // Implementation for provider payout submission
     }
 
     async fn check_status(&self, transaction_id: &str) -> Result<String, PayoutError> {
-        // Implementation
-        todo!()
+        // Implementation for checking provider payout status
     }
 
     fn provider_name(&self) -> &str {
@@ -85,4 +83,4 @@ Open an issue or reach out to the maintainers. We're here to help!
 
 ---
 
-Built with ❤️ for Drips Wave
+Built with ❤️ for the stellar eco-system

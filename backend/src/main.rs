@@ -56,9 +56,17 @@ async fn health_check() -> (StatusCode, Json<Value>) {
 }
 
 async fn stellar_toml() -> String {
+    let network_passphrase = std::env::var("STELLAR_NETWORK_PASSPHRASE")
+        .unwrap_or_else(|_| "Test SDF Network ; September 2015".to_string());
+    let distribution_public = std::env::var("STELLAR_DISTRIBUTION_PUBLIC")
+        .unwrap_or_else(|_| "YOUR_DISTRIBUTION_PUBLIC_KEY".to_string());
+    let asset_code = std::env::var("STELLAR_ASSET_CODE").unwrap_or_else(|_| "NGNT".to_string());
+    let asset_issuer = std::env::var("STELLAR_ASSET_ISSUER").unwrap_or_default();
+    let port = std::env::var("BACKEND_PORT").unwrap_or_else(|_| "8080".to_string());
+
     format!(
-        r#"NETWORK_PASSPHRASE="Test SDF Network ; September 2015"
-ACCOUNTS=["{}"]
+        r#"NETWORK_PASSPHRASE="{network_passphrase}"
+ACCOUNTS=["{distribution_public}"]
 VERSION="0.1.0"
 
 [DOCUMENTATION]
@@ -66,17 +74,19 @@ ORG_NAME="Stellar-OjaBridge"
 ORG_URL="https://github.com/yourusername/stellar-ojabridge"
 
 [[CURRENCIES]]
-code="{}"
-issuer="{}"
+code="{asset_code}"
+issuer="{asset_issuer}"
 is_asset_anchored=true
 anchor_asset_type="fiat"
 anchor_asset="NGN"
 
 [TRANSFER_SERVER_SEP0024]
-TRANSFER_SERVER="http://localhost:8080/sep24"
+TRANSFER_SERVER="http://localhost:{port}/sep24"
 "#,
-        std::env::var("STELLAR_DISTRIBUTION_PUBLIC").unwrap_or_default(),
-        std::env::var("STELLAR_ASSET_CODE").unwrap_or("NGNT".to_string()),
-        std::env::var("STELLAR_ASSET_ISSUER").unwrap_or_default()
+        network_passphrase = network_passphrase,
+        distribution_public = distribution_public,
+        asset_code = asset_code,
+        asset_issuer = asset_issuer,
+        port = port
     )
 }

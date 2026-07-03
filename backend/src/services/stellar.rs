@@ -10,7 +10,8 @@ impl StellarService {
         Self {
             horizon_url: std::env::var("STELLAR_HORIZON_URL")
                 .unwrap_or_else(|_| "https://horizon-testnet.stellar.org".to_string()),
-            network_passphrase: "Test SDF Network ; September 2015".to_string(),
+            network_passphrase: std::env::var("STELLAR_NETWORK_PASSPHRASE")
+                .unwrap_or_else(|_| "Test SDF Network ; September 2015".to_string()),
         }
     }
 }
@@ -21,6 +22,7 @@ impl Default for StellarService {
     }
 }
 
+impl StellarService {
     /// Placeholder for Stellar transaction verification.
     /// Returns `true` if the transaction is confirmed on the network.
     pub async fn verify_transaction(&self, tx_id: &str) -> Result<bool> {

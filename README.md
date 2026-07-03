@@ -37,6 +37,8 @@ stellar-ojabridge/
    # Edit .env with your configuration
    ```
 
+   Ensure `BACKEND_PORT` and `STELLAR_NETWORK_PASSPHRASE` are set in `.env`.
+
 2. **Start infrastructure**
    ```bash
    docker-compose up -d
